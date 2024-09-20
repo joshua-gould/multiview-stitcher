@@ -119,7 +119,8 @@ def read_mosaic_image_into_list_of_spatial_xarrays(path, scene_index=None):
 
     spatial_dims = [dim for dim in xim.dims if dim in si_utils.SPATIAL_DIMS]
 
-    views = range(len(xim.coords["m"]))
+    has_m_coord = "m" in xim.coords
+    views = range(len(xim.coords["m"])) if has_m_coord else [None]
 
     pixel_sizes = {}
     pixel_sizes["x"] = aicsim.physical_pixel_sizes.X
@@ -133,7 +134,7 @@ def read_mosaic_image_into_list_of_spatial_xarrays(path, scene_index=None):
     for _iview, (view, tile_mosaic_position) in enumerate(
         zip(views, tile_mosaic_positions)
     ):
-        view_xim = xim.sel(m=view)
+        view_xim = xim.sel(m=view) if has_m_coord else xim
 
         origin_values = {
             mosaic_axis: tile_mosaic_position[ima] * pixel_sizes[mosaic_axis]
