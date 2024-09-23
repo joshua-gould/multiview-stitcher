@@ -55,7 +55,7 @@ jobs:
         shell: bash
       - name: Test with pytest
         run: |
-          pytest -s aicspylibczi/tests
+          pytest -s aicspylibczi/aicspylibczi/tests
         env:
           PLATFORM: ${{ matrix.platform }}
 
