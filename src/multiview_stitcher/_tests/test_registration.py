@@ -24,6 +24,8 @@ from multiview_stitcher.io import METADATA_TRANSFORM_KEY
     ],
 )
 def test_pairwise_reg_against_sample_gt(pairwise_reg_func):
+    if pairwise_reg_func == registration.registration_ANTsPy:
+        pytest.importorskip("ants")
     example_data_path = sample_data.get_mosaic_sample_data_path()
     sims = io.read_mosaic_image_into_list_of_spatial_xarrays(example_data_path)
 
