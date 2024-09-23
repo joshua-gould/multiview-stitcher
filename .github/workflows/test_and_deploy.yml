@@ -17,10 +17,10 @@ on:
 jobs:
   test:
     name: ${{ matrix.platform }} py${{ matrix.python-version }}
-    runs-on: ${{ matrix.platform }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        platform: [windows-latest]
+        os: [windows-latest]
         python-version: ['3.11']
 
     steps:
@@ -57,9 +57,6 @@ jobs:
         run: |
           python -m pip install --upgrade fsspec
           pytest -s aicspylibczi/aicspylibczi/tests
-        env:
-          PLATFORM: ${{ matrix.platform }}
-
       - name: Coverage
         uses: codecov/codecov-action@v3
 
