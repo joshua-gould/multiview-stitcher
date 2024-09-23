@@ -31,15 +31,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      # note: if you need dependencies from conda, considering using
-      # setup-miniconda: https://github.com/conda-incubator/setup-miniconda
-      # and
-      # tox-conda: https://github.com/tox-dev/tox-conda
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install --upgrade setuptools
-
+      - name: Install package
+        run: |
+          python -m pip install .[testing]
       - name: Test with pytest
         run: |
           pytest -s src/multiview_stitcher/_tests
