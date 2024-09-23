@@ -55,7 +55,7 @@ jobs:
         shell: bash
       - name: Test with pytest
         run: |
-          pytest -s src/multiview_stitcher/_tests
+          pytest -s aicspylibczi
         env:
           PLATFORM: ${{ matrix.platform }}
 
