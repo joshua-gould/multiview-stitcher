@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install setuptools
+          python -m pip install --upgrade setuptools
       - name: Install package
         run: |
           python -m pip install .[testing]
@@ -51,11 +51,11 @@ jobs:
           path: aicspylibczi
       - name: install czi
         if: runner.os == 'Windows'
-        run: python -m pip install ./aicspylibczi && rm -rf ./aicspylibczi
+        run: python -m pip install ./aicspylibczi
         shell: bash
       - name: Test with pytest
         run: |
-          pytest .
+          pytest -s src/multiview_stitcher/_tests
         env:
           PLATFORM: ${{ matrix.platform }}
 
